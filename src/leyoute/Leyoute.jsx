@@ -2,7 +2,8 @@
 import Home from "../componenets/home/Home";
 import LeftSideBar from "../componenets/leftSide/LeftSideBar";
 import MyFooter from "../componenets/myfooter/MyFooter";
-import NavBar from "../componenets/navbar/NavBar";
+import Header from "../componenets/navbar/Header";
+
 import RightSideBar from "../componenets/rightside/RightSideBar";
 import initialbookdata from "../data/initialbookdata";
 
@@ -13,7 +14,8 @@ function Leyoute() {
 
   return (
     <div>
-      <NavBar />
+    
+    <Header />
 
       <div className="min-h-screen grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4  text-white justify-center ">
         {/* left Sidebar */}
