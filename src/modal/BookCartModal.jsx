@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Modal } from "flowbite-react";
 import AddToCart from "../section/addtocart/AddToCart";
 
-function BookCartModal({onOpen,onClose,bookData}) {
+
+function BookCartModal({onOpen,onClose,bookData, addToCart}) {
 
   return (
     <Modal show={onOpen}>
-    <div className="bg-gray-800 text-white items-center  rounded-lg shadow-lg ps-6 flex flex-col md:flex-row max-w-4xl mx-auto">
+    <div className="bg-gray-800 text-white items-center  rounded-lg shadow-lg ps-6 flex flex-col md:flex-row max-w-2xl mx-auto">
       {/* Left Section - Text */}
       <div className="flex-1 md:pr-6 mb-6 md:mb-0 space-y-4 order-2  md:order-1 ">
         <h2 className="text-2xl md:text-3xl font-semibold mt-4 mb-2">
@@ -21,7 +23,8 @@ function BookCartModal({onOpen,onClose,bookData}) {
 
         {/* Add to card */}
         <div className=" flex gap-4">
-       <AddToCart />
+          <AddToCart onAddToCart={() => addToCart(bookData)} bookData={bookData} />
+
           <button
             onClick={onClose}
             className=" py-2 px-4 bg-white text-black rounded-md hover:bg-[#00D991]"
