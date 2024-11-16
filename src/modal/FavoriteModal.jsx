@@ -1,45 +1,51 @@
 /* eslint-disable react/prop-types */
 import { FaTrash } from "react-icons/fa";
 
-function FavoriteModal({ bookData, onClose, onAdd, onDelete }) {
+function FavoriteModal({ bookData, onClose, onDelete }) {
+  console.log(bookData);
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md shadow-lg">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Favorite Books</h2>
-          <button onClick={onClose} className="text-gray-600 dark:text-white hover:text-red-600 transition duration-150">
-            ✖
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[500px]">
+        <h2 className="text-2xl font-semibold mb-4 border-b pb-1 text-center text-black dark:text-white">
+          Favorites
+        </h2>
+
+        {/* Display Favorite Books */}
+        <div className="space-y-4">
+          {bookData.length > 0 ? (
+            bookData.map((book) => (
+              <div
+                key={book.id}
+                className="flex items-center justify-between bg-gray-100 dark:bg-gray-700 p-4 rounded-md"
+              >
+                <img
+                  src={book.image}
+                  alt={book.name}
+                  className="w-12 h-12 object-cover rounded-md"
+                />
+                <div className="flex-1 ml-4">
+                  <h3 className="text-lg font-medium text-black dark:text-white">
+                    {book.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">{book.author}</p>
+                </div>
+            
+                <button onClick={() => onDelete(book.id)} className="ml-2 text-red-600">
+                  <FaTrash />
+                </button>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-600 dark:text-gray-300">No favorites added.</p>
+          )}
+        </div>
+
+        {/* Close Button */}
+        <div className="flex justify-center mt-6">
+          <button onClick={onClose} className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded">
+            Close
           </button>
         </div>
-        
-        {bookData.length > 0 ? (
-          <div className="space-y-4">
-            {bookData.map((book) => (
-              <div key={book.id} className="flex justify-between items-center p-3 bg-gray-200 dark:bg-gray-700 rounded-md">
-                <div>
-                  <h3 className="text-lg font-medium text-gray-800 dark:text-white">{book.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">${book.price}</p>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => onAdd(book)}
-                    className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-500"
-                  >
-                    Add to Cart
-                  </button>
-                  <button
-                    onClick={() => onDelete(book.id)}
-                    className="text-red-600 hover:text-red-800 transition duration-150"
-                  >
-                    <FaTrash size={18} />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-700 dark:text-gray-300">No favorite books added.</p>
-        )}
       </div>
     </div>
   );

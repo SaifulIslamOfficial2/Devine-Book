@@ -1,61 +1,71 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-// BookGalleryItem.jsx
 import { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaHeart } from "react-icons/fa";
 import AddToCart from "../addtocart/AddToCart";
 import BookCartModal from "../../modal/BookCartModal";
-
-function BookGalleryItem({ bookData, addToCart }) {
+function BookGalleryItem({
+  book,
+  addToCart,
+  addToFavorites,
+  removeFromFavorites,
+}) {
   const [openModal, setOpenModal] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false); // Heart icon color state
 
-  // Toggles modal visibility
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const handleFavoriteClick = () => {
+    if (isFavorited) {
+      setIsFavorited(false); 
+      removeFromFavorites(book.id); 
+    } else {
+      setIsFavorited(true); 
+      addToFavorites(book); 
+    }
+  };
+
   return (
-    <div className="p-4 rounded-lg shadow-lg border max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
+    <div className="p-4 sm:p-6 rounded-lg shadow-lg border  mx-auto">
       <div className="space-y-4">
-        {/* Image */}
-        <div className="relative h-48 sm:h-60 md:h-72 lg:h-80 xl:h-96 ">
+        <div className="relative  ">
           <img
             onClick={handleOpenModal}
-            src={bookData.image}
-            alt={bookData.name}
+            src={book.image}
+            alt={book.name}
             className="object-cover w-full h-full rounded-lg cursor-pointer transition-transform duration-300 hover:scale-105"
           />
         </div>
-        
-        {/* Book Details */}
         <div>
-          <h2 className="text-lg md:text-xl font-semibold text-black dark:text-white text-center">
-            {bookData.name}
+          <h2 className="text-lg md:text-xl font-semibold text-black dark:text-white">
+            {book.name}
           </h2>
-          <p className="mt-2 text-sm md:text-base text-center text-gray-700 dark:text-gray-300">
-            {bookData.author}
+          <p className="mt-2 text-sm md:text-base text-gray-700 dark:text-gray-300">
+            {book.author}
           </p>
         </div>
-        
-        {/* Rating */}
-        <div className="flex justify-center gap-1">
-          {[...Array(bookData.rating)].map((_, i) => (
+        <div className="flex gap-1">
+          {[...Array(book.rating)].map((_, i) => (
             <FaStar key={i} className="text-[#00D991]" />
           ))}
         </div>
-        
-        {/* Add to Cart Button */}
-        <div className="flex justify-center">
-          <AddToCart   onAddToCart={() => addToCart(bookData)} bookData={bookData} />
+        <div className="flex justify-between gap-3 items-center">
+          <AddToCart onAddToCart={() => addToCart(book)} book={book} />
+          <FaHeart
+            onClick={handleFavoriteClick}
+            className={`text-2xl cursor-pointer ${
+              isFavorited ? "text-[#00D991]" : "text-gray-700"
+            }`}
+          />
         </div>
-        
-        {/* Book Cart Modal */}
         {openModal && (
           <BookCartModal
             onOpen={openModal}
             onClose={handleCloseModal}
-            bookData={bookData}
+            book={book}
             className="z-50 flex items-center justify-center bg-black bg-opacity-50"
-            addToCart={ addToCart}
+            addToCart={addToCart}
           />
         )}
       </div>

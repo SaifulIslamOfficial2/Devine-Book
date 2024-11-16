@@ -1,21 +1,19 @@
-import { FaRegHeart } from "react-icons/fa";
+/* eslint-disable react/prop-types */
 
-function AddToCart({ bookData, onAddToCart, onAddToFavorites }) {
+
+function AddToCart({ book, onAddToCart }) {
+  
   return (
     <div className="flex justify-between gap-3">
       <button
         onClick={onAddToCart}
-        className="bg-green-600 hover:bg-green-500 text-white py-2 px-2 rounded-sm flex items-center"
+        className="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-sm flex items-center"
       >
-        {`$${bookData?.price} | Add to cart`}
+        ${book?.price} | Add to cart
       </button>
-      <FaRegHeart
-        onClick={() => onAddToFavorites(bookData)}
-        className="text-gray-700 cursor-pointer hover:text-red-600 transition duration-150"
-        size={22}
-      />
     </div>
   );
+
 }
 
 export default AddToCart;

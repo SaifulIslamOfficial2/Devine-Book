@@ -1,5 +1,4 @@
 
-
 function MyFooter() {
   return (
     <div className="bg-gray-100 dark:bg-gray-800 duration-200 w-full py-6 items-center text-center border-t">
