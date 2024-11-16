@@ -7,7 +7,7 @@ function AddToCart({ book, onAddToCart }) {
     <div className="flex justify-between gap-3">
       <button
         onClick={onAddToCart}
-        className="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-sm flex items-center"
+        className="bg-green-600 hover:bg-green-500 text-white py-1 px-2 rounded-sm flex items-center"
       >
         ${book?.price} | Add to cart
       </button>
