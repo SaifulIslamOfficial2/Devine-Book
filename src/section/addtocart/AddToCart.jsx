@@ -2,15 +2,22 @@
 import { useState } from "react";
 
 function AddToCart({ book, onAddToCart }) {
-  // Added to cart
-  const [isAdded, setIsAdded] = useState(false);
+  // Added to cart tracking for each book
+  const [addedBooks, setAddedBooks] = useState({});
 
-  //click handle 
+  // Click handle
   const handleAddToCart = () => {
-    onAddToCart(); 
-    setIsAdded(true); 
+    onAddToCart();
+    setAddedBooks((prev) => ({
+      ...prev,
+      [book.id]: true, // Mark this book as added
+    }));
+
     setTimeout(() => {
-      setIsAdded(false); 
+      setAddedBooks((prev) => ({
+        ...prev,
+        [book.id]: false, // Reset added state after 2 seconds
+      }));
     }, 2000);
   };
 
@@ -19,11 +26,11 @@ function AddToCart({ book, onAddToCart }) {
       <button
         onClick={handleAddToCart}
         className={`${
-          isAdded ? "bg-gray-400" : "bg-green-600 hover:bg-green-500"
+          addedBooks[book.id] ? "bg-gray-400" : "bg-green-600 hover:bg-green-500"
         } text-white py-1 px-2 rounded-sm flex items-center`}
-        disabled={isAdded} // Added button 
+        disabled={addedBooks[book.id]} // Disable if already added
       >
-        {isAdded ? "Added to Cart" : `$${book?.price} | Add to cart`}
+        {addedBooks[book.id] ? "Added to Cart" : `$${book?.price} | Add to cart`}
       </button>
     </div>
   );

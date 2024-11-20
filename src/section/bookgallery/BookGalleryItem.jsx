@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
 import AddToCart from "../addtocart/AddToCart";
 import BookCartModal from "../../modal/BookCartModal";
+
 function BookGalleryItem({
   book,
   addToCart,
