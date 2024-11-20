@@ -7,7 +7,6 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { MdLightMode, MdMenu } from "react-icons/md";
 import { MdClose } from "react-icons/md";
-import LeftSearchBar from "../leftSearachBar/LeftSearchBar";
 
 function Header({ itemCount, onCartClick, onFilterChange }) {
   const [activeFilter, setActiveFilter] = useState(null);

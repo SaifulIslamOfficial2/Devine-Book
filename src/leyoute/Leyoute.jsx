@@ -74,7 +74,7 @@ function Leyoute({ onSearch }) {
   return (
     <div>
       {/* header */}
-      <Header  itemCount={cartItems.length} onCartClick={toggleModal} />
+      <Header    onFilterChange={handleFilterChange} itemCount={cartItems.length} onCartClick={toggleModal} />
 
       <div className="min-h-screen grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4 text-white justify-center">
         {/* leftSideber*/}
