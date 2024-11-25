@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { CiHeart } from "react-icons/ci";
 import { FaFire } from "react-icons/fa";

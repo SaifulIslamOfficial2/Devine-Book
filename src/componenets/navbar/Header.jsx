@@ -7,12 +7,13 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { MdLightMode, MdMenu } from "react-icons/md";
 import { MdClose } from "react-icons/md";
+import LeftSearchBar from "../leftSearachBar/LeftSearchBar";
 
 function Header({ itemCount, onCartClick, onFilterChange }) {
   const [activeFilter, setActiveFilter] = useState(null);
   const [theme, setTheme] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [searchModal, setSearchModal] = useState(false);
   // Toggle theme between dark and light mode
   const themeHandler = () => {
     setTheme(!theme);
@@ -38,7 +39,10 @@ function Header({ itemCount, onCartClick, onFilterChange }) {
     onFilterChange(filterType);
     setSidebarOpen(false);
   };
-
+// search
+const searchModalopen = () => {
+  setSearchModal(true);
+};
   return (
     <header className="z-50 bg-gray-100 dark:bg-slate-900 fixed w-full top-0 left-0">
       <nav className="lg:px-14 p-4 flex justify-between items-center border-b duration-200">
@@ -93,6 +97,7 @@ function Header({ itemCount, onCartClick, onFilterChange }) {
                 {" "}
                 Devine Book{" "}
               </h1>
+              <LeftSearchBar searchModalopen={searchModalopen} />
             </div>
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               Filter On Page
